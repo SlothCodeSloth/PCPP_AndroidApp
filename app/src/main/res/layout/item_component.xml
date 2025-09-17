@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="match_parent"
+android:layout_height="120dp"
+android:orientation="horizontal"
+android:padding="8dp"
+android:gravity="center_vertical"
+    android:background="@drawable/background_card"
+    android:layout_marginTop="10dp">
+
+<!-- Image on the left -->
+<ImageView
+    android:id="@+id/componentImage"
+    android:layout_width="100dp"
+    android:layout_height="100dp"
+    android:layout_marginEnd="8dp"
+    android:contentDescription="Image"
+    android:scaleType="centerCrop" />
+
+<!-- Vertical stack for name and price -->
+<LinearLayout
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_weight="1"
+    android:orientation="vertical"
+    android:gravity="start">
+
+    <TextView
+        android:id="@+id/componentName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Product Name"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:maxLines="2"
+        android:ellipsize="end"
+        android:paddingEnd="8dp"/>
+
+    <TextView
+        android:id="@+id/componentPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Price"
+        android:textColor="#555555"
+        android:textSize="14sp" />
+
+</LinearLayout>
+
+<Button
+    android:id="@+id/componentButton"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Add to\nList"
+    android:clickable="true"
+    android:focusable="true"
+    android:maxLines="2"
+    android:visibility="visible"
+    android:backgroundTint="?attr/colorSecondary"/>
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:id="@+id/componentPriceAlt"
+    android:textSize="14dp"
+    android:text="Price"
+    android:textStyle="bold"
+    android:textColor="#555555"
+    android:visibility="gone"
+    />
+</LinearLayout>

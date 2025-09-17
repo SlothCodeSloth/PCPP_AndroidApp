@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:padding="12dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" >
+
+    <ImageView
+        android:id="@+id/bundleImage"
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:scaleType="centerCrop" />
+
+    <TextView
+        android:id="@+id/bundleName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:paddingTop="8dp"
+        android:text="Bundle Name" />
+
+    <TextView
+        android:id="@+id/bundlePrice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#FF6200EE"
+        android:textSize="16sp"
+        android:paddingTop="4dp"
+        android:text="$123.45" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/bundleComponentsRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:nestedScrollingEnabled="false"
+        android:padding="8dp" />
+
+</LinearLayout>

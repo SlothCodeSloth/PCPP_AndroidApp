@@ -1,0 +1,16 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.PCPartPicker" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorSurface">@color/background_nightPicker</item>
+        <item name="colorSurfaceContainerHigh">@color/textBackground_nightPicker</item>
+        <item name="colorSurfaceContainerLow">@color/card_nightPicker</item>
+        <item name="colorOnSurface">@color/text_lightPicker</item>
+        <item name="colorOnSurfaceVariant">@color/header_nightPicker</item>
+        <item name="colorOnSurfaceInverse">@color/textHeader_lightPicker</item>
+        <item name="colorPrimary">@color/header_nightPicker</item>
+        <item name="colorSecondary">@color/button_nightPicker</item>
+        <item name="colorSecondaryContainer">@color/itemSelected_lightPicker</item>
+    </style>
+
+    <style name="Theme.PCPartPicker" parent="Base.Theme.PCPartPicker" />
+</resources>

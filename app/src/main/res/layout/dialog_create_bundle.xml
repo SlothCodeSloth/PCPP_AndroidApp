@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/dialogLayout"
+    android:padding="24dp"
+    android:background="@drawable/background_card">
+
+    <TextView
+        android:id="@+id/bundleLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add a Bundle"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:gravity="center_horizontal"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/bundleNameLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="Bundle Name"
+        android:textStyle="bold"
+        android:paddingStart="4dp"
+        app:layout_constraintTop_toBottomOf="@id/bundleLabel"
+        app:layout_constraintStart_toStartOf="@id/dialogLayout"/>
+
+    <EditText
+        android:id="@+id/bundleNameTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter Name"
+        app:layout_constraintTop_toBottomOf="@id/bundleNameLabel"
+        app:layout_constraintStart_toStartOf="@id/dialogLayout"
+        app:layout_constraintEnd_toEndOf="@id/dialogLayout"
+        android:padding="4dp"
+        android:background="@drawable/background_text" />
+
+    <TextView
+        android:id="@+id/urlLabelTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Vendor URL"
+        android:textStyle="bold"
+        android:paddingStart="4dp"
+        android:layout_marginTop="12dp"
+        app:layout_constraintTop_toBottomOf="@id/bundleNameTextView"
+        app:layout_constraintStart_toStartOf="@+id/dialogLayout"
+        />
+
+    <EditText
+        android:id="@+id/bundleURLTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter URL"
+        app:layout_constraintTop_toBottomOf="@+id/urlLabelTextView"
+        app:layout_constraintStart_toStartOf="@id/dialogLayout"
+        android:padding="4dp"
+        android:background="@drawable/background_text"
+        />
+
+    <TextView
+        android:id="@+id/imageLabelTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="Bundle Image"
+        android:textStyle="bold"
+        android:paddingStart="4dp"
+        app:layout_constraintTop_toBottomOf="@id/bundleURLTextView"
+        app:layout_constraintStart_toStartOf="@id/dialogLayout"/>
+
+    <EditText
+        android:id="@+id/bundleImageTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter Image URL"
+        app:layout_constraintTop_toBottomOf="@id/imageLabelTextView"
+        app:layout_constraintStart_toStartOf="@id/dialogLayout"
+        android:padding="4dp"
+        android:background="@drawable/background_text" />
+
+    <TextView
+        android:id="@+id/vendorLabelTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="Bundle Vendor"
+        android:textStyle="bold"
+        android:paddingStart="4dp"
+        app:layout_constraintTop_toBottomOf="@id/bundleImageTextView"
+        app:layout_constraintStart_toStartOf="@id/dialogLayout"/>
+
+    <EditText
+        android:id="@+id/bundleVendorTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Enter Vendor"
+        app:layout_constraintTop_toBottomOf="@id/vendorLabelTextView"
+        app:layout_constraintStart_toStartOf="@id/dialogLayout"
+        app:layout_constraintEnd_toStartOf="@+id/bundlePriceTextView"
+        android:padding="4dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/background_text" />
+
+    <TextView
+        android:id="@+id/priceLabelTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Bundle Price"
+        android:textStyle="bold"
+        android:paddingStart="4dp"
+        app:layout_constraintTop_toBottomOf="@id/bundleImageTextView"
+        app:layout_constraintStart_toStartOf="@id/bundlePriceTextView"
+        android:layout_marginTop="12dp" />
+
+    <EditText
+        android:id="@+id/bundlePriceTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Enter Price"
+        app:layout_constraintTop_toBottomOf="@id/priceLabelTextView"
+        app:layout_constraintEnd_toEndOf="@id/dialogLayout"
+        app:layout_constraintStart_toEndOf="@+id/bundleVendorTextView"
+        android:padding="4dp"
+        android:layout_marginStart="8dp"
+        android:background="@drawable/background_text"
+        android:inputType="numberDecimal"
+        />
+
+    <Button
+        android:id="@+id/saveButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Save"
+        app:layout_constraintTop_toBottomOf="@id/bundlePriceTextView"
+        app:layout_constraintEnd_toEndOf="@id/bundlePriceTextView"
+        android:layout_marginTop="12dp"
+        android:backgroundTint="?attr/colorSecondary"/>
+
+    <Button
+        android:id="@+id/cancelButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cancel"
+        app:layout_constraintTop_toBottomOf="@id/bundlePriceTextView"
+        app:layout_constraintEnd_toStartOf="@id/saveButton"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="12dp"
+        android:backgroundTint="?attr/colorSecondary"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

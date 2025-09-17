@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <!-- Night Mode - PCP Colors -->
+    <color name="header_nightPicker">#3d3d54</color>
+    <color name="background_nightPicker">#282838</color>
+    <color name="card_nightPicker">#46465c</color>
+    <color name="textBackground_nightPicker">#11111c</color>
+    <color name="button_nightPicker">#195fa3</color>
+
+    <!-- Light Mode - PCP Colors -->
+    <color name="header_lightPicker">#545578</color>
+    <color name="background_lightPicker">#f4f4f3</color>
+    <color name="card_lightPicker">#ffffff</color>
+    <color name="textBackground_lightPicker">#f7f7f7</color>
+    <color name="button_lightPicker">#2c87c3</color>
+    <color name="text_lightPicker">#191b2a</color>
+    <color name="textHeader_lightPicker">#ffffff</color>
+    <color name="itemSelected_lightPicker">#60545578</color>
+    <!-- #80545578, #40545578, #20545578-->
+
+    <!-- Night Mode - Android Colors -->
+    <color name="header_nightAndroid">#3d3d54</color>
+    <color name="background_nightAndroid">#282838</color>
+    <color name="card_nightAndroid">#46465c</color>
+    <color name="textBackground_nightAndroid">#11111c</color>
+    <color name="button_nightAndroid">#195fa3</color>
+
+    <!-- Light Mode - Android Colors -->
+    <color name="header_lightAndroid">#f3f0f3</color>
+    <color name="background_lightAndroid">#f3f0f3</color>
+    <color name="card_lightAndroid">#fdfdfd</color>
+    <color name="textBackground_lightAndroid">#fdfdfd</color>
+    <color name="button_lightAndroid">#6750a4</color>
+    <color name="text_lightAndroid">#191b2a</color>
+    <color name="textHeader_lightAndroid">#2f2f2f</color>
+    <color name="itemSelected_lightAndroid">#c19ce9</color>
+</resources>

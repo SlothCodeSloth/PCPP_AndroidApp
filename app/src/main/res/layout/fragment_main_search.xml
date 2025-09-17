@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="?attr/colorSurface">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="8dp"
+        android:paddingBottom="16dp"
+        android:id="@+id/searchHeader"
+        android:text="Search"
+        app:layout_constraintTop_toTopOf="parent"
+        android:gravity="center_horizontal"
+        android:textStyle="bold"
+        android:textSize="24sp"
+        android:background="?attr/colorOnSurfaceVariant"
+        android:textColor="?attr/colorOnSurfaceInverse"/>
+
+    <TextView
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/background_header"
+        android:gravity="center_horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/searchHeader"
+        android:layout_marginTop="-9dp"
+        android:layout_marginStart="-4dp"
+        android:layout_marginEnd="-4dp"/>
+
+    <EditText
+        android:id="@+id/searchText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:padding="12dp"
+        android:background="@drawable/background_text"
+        app:layout_constraintTop_toBottomOf="@id/searchHeader"
+        android:gravity="center_horizontal"
+        app:layout_constraintStart_toStartOf="@id/searchHeader"
+        app:layout_constraintEnd_toEndOf="@id/searchHeader"
+        android:hint="Search Part"
+        android:inputType="text"
+        android:visibility="visible"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/filterButton"
+        android:gravity="center"
+        app:layout_constraintStart_toStartOf="@id/searchHeader"
+        app:layout_constraintTop_toBottomOf="@id/searchHeader"
+        app:layout_constraintEnd_toEndOf="@id/searchHeader"
+        android:backgroundTint="?attr/colorSecondary"
+        android:text="Filter"
+        android:visibility="gone"
+        android:layout_marginTop="4dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/toggleButton"
+        android:gravity="center"
+        app:layout_constraintStart_toStartOf="@id/searchText"
+        app:layout_constraintTop_toBottomOf="@id/searchText"
+        android:backgroundTint="?attr/colorSecondary"
+        android:text="Filter"
+        android:layout_marginTop="4dp" />
+
+    <Button
+        android:id="@+id/searchButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="4dp"
+        android:text="Search"
+        app:layout_constraintTop_toBottomOf="@id/searchText"
+        app:layout_constraintEnd_toEndOf="@id/searchText"
+        android:backgroundTint="?attr/colorSecondary"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        android:layout_weight="1"
+        android:scrollbars="vertical"
+        app:layout_constraintTop_toBottomOf="@+id/searchButton"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

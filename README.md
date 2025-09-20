@@ -23,6 +23,31 @@ PCPartPicker extends the typical PC building experience by allowing users to:
 - 🛠 **Smart Error Handling**: In-app error reporting with automatic retry mechanisms
 
 ---
+## 🖼️ Examples  
+As described above, the app allows for searching through input or by category. 
+<p align="center">
+   <img src="assets/SearchImage.png" width="200"/>
+   &nbsp;&nbsp;&nbsp;
+   <img src="assets/FilterImage.png" width="200"/>
+</p>
+
+As described above, the app allows for the creation of custom lists, bundles, and easy management of components within them! 
+<p align="center">
+   <img src="assets/CreateListImage.png" width="200"/>
+   &nbsp;&nbsp;&nbsp;
+   <img src="assets/ListImage.png" width="200"/>
+   &nbsp;&nbsp;&nbsp;
+   <img src="assets/BundleImage.png" width="200"/>
+</p>
+
+Shown below are early examples of swapping themes and switching to dark mode.  
+<p align="center">
+   <img src="assets/ThemeVideo.gif" width="200"/>
+   &nbsp;&nbsp;&nbsp;
+   <img src="assets/DarkModeVideo.gif" width="200"/>
+</p>
+
+---
 
 ## 🏗️ Tech Stack
 
@@ -75,7 +100,7 @@ PCPartPicker extends the typical PC building experience by allowing users to:
 3. **Build and run**
    ```bash
    ./gradlew assembleDebug
-   # Or use Android Studio's Run button
+   # Or use Android Studio's Run button (Android Emulator or Physical Android Device Required)
    ```
 
 ---

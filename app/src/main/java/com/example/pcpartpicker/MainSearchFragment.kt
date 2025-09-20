@@ -27,6 +27,7 @@ import androidx.core.view.isVisible
  * - Toggle button to switch between input and filter searching mode.
  * - Displays results in a [RecyclerView]..
  * - Allows adding components to lists.
+ * - Preserves search state across theme changes.
  */
 class MainSearchFragment : Fragment() {
     private val viewModel: PartViewModel by activityViewModels {
@@ -86,7 +87,6 @@ class MainSearchFragment : Fragment() {
         }
         arriveTop = AnimationUtils.loadAnimation(requireContext(), R.anim.button_enter_top)
 
-
         val animationListener = object : Animation.AnimationListener {
             override fun onAnimationStart(p0: Animation?) {
             }
@@ -110,7 +110,6 @@ class MainSearchFragment : Fragment() {
                     val intent = DetailActivity.newIntent(requireContext(), component)
                     startActivity(intent)
                 }
-
             },
             onAddClick = { item ->
                 if (item !is ListItem.ComponentItem) return@ComponentAdapter
@@ -131,14 +130,6 @@ class MainSearchFragment : Fragment() {
                             Toast.makeText(requireContext(), "List Not Found", Toast.LENGTH_SHORT).show()
                             return@SelectListDialog
                         }
-                        /*
-                        val componentEntity = ComponentEntity(
-                            url = selectedProduct.url,
-                            name = selectedProduct.name ?: "Unknown",
-                            price = selectedProduct.price ?:"N/A?",
-                            image = selectedProduct.image
-                        )
-                         */
 
                         viewLifecycleOwner.lifecycleScope.launch {
                             dao.insertComponent(component)
@@ -166,16 +157,12 @@ class MainSearchFragment : Fragment() {
         toggleButton.setOnClickListener {
             toggleButton.isEnabled = false
             if (searchText.isVisible) {
-                // searchText.setAnimation(btnLeaveTop)
                 searchText.visibility = View.INVISIBLE
-                // filter.setAnimation(btnArriveTop)
                 filterButton.startAnimation(arriveTop)
                 filterButton.visibility = View.VISIBLE
             }
             else {
-                // filter.setAnimation(btnLeaveTop)
                 filterButton.visibility = View.INVISIBLE
-                // searchText(btnArriveTop)
                 searchText.startAnimation(arriveTop)
                 searchText.visibility = View.VISIBLE
             }
@@ -194,7 +181,6 @@ class MainSearchFragment : Fragment() {
                 }
                 else {
                     filterButton.text = selectedItem
-                    val query = searchText.text.toString()
                     val productType = productTypes[selectedItem] ?: ""
                     adapter.clearComponents()
                     viewModel.startSearch(productType, null, requireContext())
@@ -214,16 +200,38 @@ class MainSearchFragment : Fragment() {
             }
         })
 
+        // Observe existing parts (for theme changes)
+        viewModel.parts.observe(viewLifecycleOwner) { parts ->
+            if (parts.isNotEmpty()) {
+                adapter.clearComponents()
+                parts.forEach { part ->
+                    val entity = ComponentEntity(
+                        url = part.url,
+                        name = part.name,
+                        price = part.price,
+                        image = part.image,
+                        customPrice = part.customPrice
+                    )
+                    adapter.addComponents(entity)
+                }
+            }
+        }
+
+        // Observe new parts (for pagination)
         viewModel.newParts.observe(viewLifecycleOwner, Observer { newItems ->
-            newItems.forEach { part ->
-                val entity = ComponentEntity(
-                    url = part.url,
-                    name = part.name,
-                    price = part.price,
-                    image = part.image,
-                    customPrice = part.customPrice
-                )
-                adapter.addComponents(entity)
+            // Only add new items if we don't already have results loaded
+            // (to prevent duplication after theme changes)
+            if (!viewModel.hasCurrentResults() || newItems.isNotEmpty()) {
+                newItems.forEach { part ->
+                    val entity = ComponentEntity(
+                        url = part.url,
+                        name = part.name,
+                        price = part.price,
+                        image = part.image,
+                        customPrice = part.customPrice
+                    )
+                    adapter.addComponents(entity)
+                }
             }
         })
 

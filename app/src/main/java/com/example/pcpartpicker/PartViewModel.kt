@@ -15,6 +15,7 @@ import kotlinx.coroutines.launch
  * - Manages the state of search results, new parts, loading, and errors.
  * - Handles paging logic (current page, total pages).
  * - Exposes LiveData for UI to observe.
+ * - Preserves search state across configuration changes (like theme switches).
  *
  * @param api Retrofit API client for fetching data from the backend.
  */
@@ -43,14 +44,22 @@ class PartViewModel(private val api: PyPartPickerApi) : ViewModel() {
     private val pageSize: Int = 5
     private var currentProductType: String? = null
 
+    // Add flag to track if we have existing results
+    private var hasExistingResults: Boolean = false
+
     // Start a new search
     fun startSearch(query: String, productType: String?, context: Context) {
+        // Only trigger new search if query/product type actually changed
         if (query != currentQuery || productType != currentProductType) {
             currentQuery = query
             currentProductType = productType
             currentPage = 1
             totalPages = 1
+            hasExistingResults = false
             _parts.value = emptyList()
+            loadPage(context)
+        } else if (!hasExistingResults) {
+            // If same query but no existing results (like after theme change), load first page
             loadPage(context)
         }
     }
@@ -95,6 +104,7 @@ class PartViewModel(private val api: PyPartPickerApi) : ViewModel() {
                 _parts.value = currentList
                 _newParts.value = newParts
                 currentPage++
+                hasExistingResults = true
             }
             catch (e: Exception) {
                 _errorMessage.value = "Failed to load data: ${e.message}"
@@ -103,6 +113,21 @@ class PartViewModel(private val api: PyPartPickerApi) : ViewModel() {
                 _isLoading.value = false
             }
         }
+    }
+
+    // Method to check if we have current search results
+    fun hasCurrentResults(): Boolean {
+        return hasExistingResults && !_parts.value.isNullOrEmpty()
+    }
+
+    // Clear all search data
+    fun clearSearch() {
+        currentQuery = ""
+        currentProductType = null
+        currentPage = 1
+        totalPages = 1
+        hasExistingResults = false
+        _parts.value = emptyList()
     }
 
     // Fetch product details

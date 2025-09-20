@@ -19,6 +19,13 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import retrofit2.*
 import retrofit2.converter.gson.GsonConverterFactory
 
+/**
+ * The main entry point of the app.
+ *
+ * - Hosts a [ViewPager2] that manages three primary screens: Settings, Search, and Lists.
+ * - Integrates with a [BottomNavigationView] to sync navigation with the pager.
+ * - Applies theme via [ThemeManager] before displaying the UI.
+ */
 class MainActivity : AppCompatActivity() {
     // Oconomowoc
     private val viewModel: PartViewModel by viewModels { PartViewModelFactory((application as MyApplication).api) }
@@ -37,9 +44,12 @@ class MainActivity : AppCompatActivity() {
 
         val pagerAdapter = MainPagerAdapter(this, listNames)
         viewPager.adapter = pagerAdapter
+
+        // Default to the Search tab
         viewPager.setCurrentItem(1, false)
         bottomNav.selectedItemId = R.id.search
 
+        // Sync the bottom navigation when switching pages
         viewPager.registerOnPageChangeCallback(object: ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
                 when (position) {
@@ -50,6 +60,7 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
+        // Sync the ViewPager when switching pages
         bottomNav.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.settings -> viewPager.setCurrentItem(0, true)

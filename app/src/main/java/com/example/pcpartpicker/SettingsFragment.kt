@@ -20,8 +20,13 @@ import androidx.appcompat.widget.SwitchCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 
+/**
+ * Settings screen fragment.
+ * - Lets users change name, region, theme, and toggle custom price display.
+ */
 class SettingsFragment : Fragment() {
 
+    // Available theme options (drawable circles). TO DO - ADD MORE
     private val themeColors = listOf(
         R.drawable.theme_circle1,
         R.drawable.theme_circle2
@@ -45,6 +50,7 @@ class SettingsFragment : Fragment() {
             "Sweden","United Kingdom", "United States")
         val switch: SwitchCompat = view.findViewById(R.id.settingsSwitch)
 
+        // Region spinner setup
         val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_dropdown_item, regions)
         regionSpinner.adapter = adapter
 
@@ -58,11 +64,13 @@ class SettingsFragment : Fragment() {
             switch.setText("Enabled      ")
         }
 
+        // Select saved region in spinner
         val savedRegionPosition = regions.indexOf(savedRegion)
         if (savedRegionPosition != -1) {
             regionSpinner.setSelection(savedRegionPosition)
         }
 
+        // Save region when changed
         regionSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
                 val selectedRegion = regions[position]
@@ -79,6 +87,7 @@ class SettingsFragment : Fragment() {
             }
         }
 
+        // Save name when user leaves the text field
         nameEditText.setOnFocusChangeListener { _, hasFocus ->
             if (!hasFocus) {
                 val name = nameEditText.text.toString()
@@ -87,6 +96,7 @@ class SettingsFragment : Fragment() {
             }
         }
 
+        // Theme selection buttons
         themeColors.forEachIndexed { index, drawableRes ->
             val imageView = ImageView(requireContext()).apply {
                 setImageResource(drawableRes)
@@ -110,9 +120,11 @@ class SettingsFragment : Fragment() {
             }
             themeContainer.addView(imageView)
         }
+        // Highlight saved theme
         selectedThemeIndex = ThemeManager.getSavedThemeIndex(requireContext())
         highlightSelectedTheme(themeContainer, selectedThemeIndex)
 
+        // Handle toggle switch
         switch.setOnCheckedChangeListener{_, isChecked ->
             if (isChecked) {
                 switch.setText("Enabled      ")
@@ -128,6 +140,7 @@ class SettingsFragment : Fragment() {
         return view;
     }
 
+    // Highlights the currently selected theme
     private fun highlightSelectedTheme(container: LinearLayout, selectedTheme: Int) {
         for (i in 0 until container.childCount) {
             val imageView = container.getChildAt(i) as ImageView

@@ -19,11 +19,21 @@ import androidx.recyclerview.widget.RecyclerView
 import kotlinx.coroutines.launch
 import androidx.core.view.isVisible
 
+/**
+ * Fragment responsible for searching for components using [PartViewModel].
+ *
+ * Features:
+ * - Text search and filter search (category).
+ * - Toggle button to switch between input and filter searching mode.
+ * - Displays results in a [RecyclerView]..
+ * - Allows adding components to lists.
+ */
 class MainSearchFragment : Fragment() {
     private val viewModel: PartViewModel by activityViewModels {
         PartViewModelFactory((requireActivity().application as MyApplication).api)
     }
 
+    // Product Names on Filter -> API mapping
     private val productTypes = mapOf(
         "Case" to "case",
         "CPU" to "cpu",
@@ -91,6 +101,7 @@ class MainSearchFragment : Fragment() {
 
         arriveTop.setAnimationListener(animationListener)
 
+        // Adapter with item click (opens detail view) and the ability to add a component to a list.
         adapter = ComponentAdapter(
             mutableListOf(),
             onItemClick = { item ->
@@ -142,6 +153,7 @@ class MainSearchFragment : Fragment() {
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
+        // Handle searching
         searchButton.setOnClickListener {
             val query = searchText.text.toString()
             if (query.isNotEmpty()) {
@@ -150,6 +162,7 @@ class MainSearchFragment : Fragment() {
             }
         }
 
+        // Toggle between search and filter input
         toggleButton.setOnClickListener {
             toggleButton.isEnabled = false
             if (searchText.isVisible) {
@@ -168,6 +181,7 @@ class MainSearchFragment : Fragment() {
             }
         }
 
+        // Open filter selection dialog
         filterButton.setOnClickListener {
             SelectListDialog(requireContext(), initialList, "Select a Filter") { selectedItem ->
                 if (selectedItem == "Show More...") {
@@ -188,6 +202,7 @@ class MainSearchFragment : Fragment() {
             }.show()
         }
 
+        // Infinite scrolling: load the next page when the user reaches the bottom
         recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)

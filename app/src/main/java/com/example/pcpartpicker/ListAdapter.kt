@@ -7,6 +7,12 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
+/**
+ * Adapter for displaying user created lists in a RecyclerView.
+ *
+ * Each list shows an icon and a name.
+ * Clicking on an item triggers the [onClick] callback.
+ */
 class ListAdapter(
     private val onClick: (ListEntity) -> Unit
 ) : RecyclerView.Adapter<ListAdapter.ListViewHolder>() {
@@ -26,19 +32,30 @@ class ListAdapter(
 
     override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
         val list = lists[position]
+        // Bind data to views
         holder.listName.text = list.name
         holder.listIcon.setImageResource(list.iconResId)
+        // Click callback
         holder.itemView.setOnClickListener { onClick(list) }
     }
 
     override fun getItemCount(): Int = lists.size
 
+    /**
+     * Replaces the current list of items with a new one.
+     * @param newLists The new data to display.
+     */
     fun submitList(newLists: List<ListEntity>) {
         lists.clear()
         lists.addAll(newLists)
         notifyDataSetChanged()
     }
 
+    /**
+     * Retrieves the list entity at the given position.
+     * @param position The index of the item.
+     * @return The corresponding [ListEntity].
+     */
     fun getListAt(position: Int): ListEntity {
         return lists[position]
     }

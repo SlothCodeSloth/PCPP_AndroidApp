@@ -3,7 +3,13 @@ package com.example.pcpartpicker
 import android.content.Context
 import android.preference.PreferenceManager
 
+/**
+ * Handles saving and retrieving app settings using SharedPreferences.
+ * - Stores region, username, custom price toggle, etc.
+ * - Provides utility functions for currency/region mapping.
+ */
 object SettingsDataManager {
+    // Preference keys and defaults
     private const val PREF_REGION_KEY = "selected_region"
     private const val PREF_NAME_KEY = "user_name"
     private const val DEFAULT_REGION = "United States"
@@ -11,6 +17,7 @@ object SettingsDataManager {
     private const val PREF_SWITCH_STATE = "switch_state"
     private const val DEFAULT_SWITCH_STATE = false
 
+    // Map region -> currency symbol
     private val regionToCurrencyMap = mapOf(
         "Australia" to "$",
         "Belgium" to "€",
@@ -36,6 +43,7 @@ object SettingsDataManager {
         "United States" to "$"
     )
 
+    // Map region -> country code
     private val regionToCodeMap = mapOf(
         "Australia" to "au",
         "Austria" to "at",
@@ -111,6 +119,7 @@ object SettingsDataManager {
             .getBoolean(PREF_SWITCH_STATE, DEFAULT_SWITCH_STATE) ?: DEFAULT_SWITCH_STATE
     }
 
+    // Price Formatting
     fun formatPrice(context: Context, price: String): String {
         val currencySymbol = getCurrencySymbol(context)
         return "$currencySymbol$price"

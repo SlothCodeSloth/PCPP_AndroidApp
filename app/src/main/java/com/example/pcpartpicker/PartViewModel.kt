@@ -8,6 +8,16 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 
+/**
+ * ViewModel for handling part search and retrieval logic.
+ *
+ * Responsibilities:
+ * - Manages the state of search results, new parts, loading, and errors.
+ * - Handles paging logic (current page, total pages).
+ * - Exposes LiveData for UI to observe.
+ *
+ * @param api Retrofit API client for fetching data from the backend.
+ */
 class PartViewModel(private val api: PyPartPickerApi) : ViewModel() {
 
     // LiveData to hold the list of parts

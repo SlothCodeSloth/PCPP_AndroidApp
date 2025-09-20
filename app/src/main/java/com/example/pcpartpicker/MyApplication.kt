@@ -5,6 +5,13 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import androidx.room.Room
 
+/**
+ * Custom [Application] class for global initialization.
+ *
+ * Responsibilities:
+ * - Provides a Retrofit API client ([PyPartPickerApi]).
+ * - Initializes and exposes the Room [AppDatabase] instance.
+ */
 class MyApplication : Application() {
     val api: PyPartPickerApi by lazy {
         Retrofit.Builder()

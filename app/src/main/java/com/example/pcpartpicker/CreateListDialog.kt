@@ -10,6 +10,18 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.appcompat.app.AlertDialog
 
+/**
+ * Custom dialog class for creating new component lists with icon selection.
+ *
+ * This dialog provides a comprehensive list creation experience featuring:
+ * - Text input for list name with validation
+ * - Visual icon selection with animated feedback
+ * - Custom styling with rounded corners
+ *
+ * @param context The Context in which the dialog should be displayed
+ * @param onListCreated Callback function called when a list is successfully created.
+ *                      Parameters: (listName: String, selectedIconId: Int)
+ */
 class CreateListDialog (
     private val context: Context,
     private val onListCreated: (String, Int) -> Unit
@@ -18,6 +30,8 @@ class CreateListDialog (
         val view = LayoutInflater.from(context).inflate(R.layout.dialog_create_list, null)
         val input = view.findViewById<EditText>(R.id.listNameEditText)
         val iconContainer = view.findViewById<LinearLayout>(R.id.iconContainer)
+
+        // Load in available icons to choose from. Default to first.
         val iconIds = listOf(
             R.drawable.baseline_computer_24,
             R.drawable.baseline_house_24,
@@ -27,6 +41,7 @@ class CreateListDialog (
         var selectedIconId = iconIds.first()
         var selectedImageView: ImageView? = null
 
+        // Add icons to the container
         iconIds.forEach { iconId ->
             val imageView = ImageView(context).apply {
                 setImageResource(iconId)
@@ -36,19 +51,23 @@ class CreateListDialog (
                 }
                 background = null
 
+                // Highlight the selected icon
                 if (iconId == selectedIconId) {
                     background = context.getDrawable(R.drawable.icon_border_highlight)
                     selectedImageView = this;
                 }
 
+                // Animate when an icon is selected
                 setOnClickListener {
                     selectedIconId = iconId
 
+                    // Reset previous icon
                     selectedImageView?.apply {
                         background = null
                         animate().scaleX(1f).scaleY(1f).setDuration(150).start()
                     }
 
+                    // Animate new icon
                     selectedImageView = this
                     background = context.getDrawable(R.drawable.icon_border_highlight)
                     animate().scaleX(.85f).scaleY(.85f).setDuration(150).withEndAction {
@@ -59,9 +78,12 @@ class CreateListDialog (
             iconContainer.addView(imageView)
         }
 
+        // Build and show the dialog
         val dialog = AlertDialog.Builder(context, R.style.RoundCornerDialog)
             .setView(view)
             .show()
+
+        // Set up Create and Cancel buttons
         val createButton = view.findViewById<Button>(R.id.confirm_button)
         val cancelButton = view.findViewById<Button>(R.id.cancel_button)
 
@@ -77,6 +99,7 @@ class CreateListDialog (
             dialog.dismiss()
         }
 
+        // 90% of the screen width
         val displayMetrics = DisplayMetrics()
         (context as? android.app.Activity)?.windowManager?.defaultDisplay?.getMetrics(displayMetrics)
         val screenWidth = displayMetrics.widthPixels

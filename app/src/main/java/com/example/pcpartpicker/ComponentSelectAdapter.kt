@@ -9,6 +9,14 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 
+/**
+ * RecyclerView adapter for displaying a selectable list of components.
+ *
+ * This adapter is specifically designed for choosing components to include in a new bundle,
+ * offered through a checkbox based selection.
+ *
+ * @param components The list of ComponentEntity objects to display
+ */
 class ComponentSelectAdapter(
     private val components: List<ComponentEntity>
 ) : RecyclerView.Adapter<ComponentSelectAdapter.ViewHolder>() {
@@ -31,6 +39,7 @@ class ComponentSelectAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val component = components[position]
 
+        // Load text and images
         holder.name.text = component.name
         holder.price.text = component.price
 
@@ -43,6 +52,7 @@ class ComponentSelectAdapter(
             holder.image.setImageResource(R.drawable.ic_launcher_background)
         }
 
+        // Toggle the checkbox when tapped
         holder.checkbox.setOnCheckedChangeListener{ _, isChecked ->
             if (isChecked) {
                 selectedItems.add(component)
@@ -52,6 +62,7 @@ class ComponentSelectAdapter(
             }
         }
 
+        // Toggle the checkbox when the item is tapped
         holder.itemView.setOnClickListener {
             holder.checkbox.isChecked = !holder.checkbox.isChecked
         }

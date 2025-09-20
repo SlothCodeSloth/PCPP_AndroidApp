@@ -28,10 +28,17 @@ import androidx.room.util.copy
 import com.bumptech.glide.Glide
 import kotlinx.coroutines.launch
 
-// Rename to ComponentActivity
-
+/**
+ * Activity for displaying detailed information about a single component.
+ * This screen shows the product’s image, name, price, specifications, and links.
+ * It also provides the user to:
+ * - Add the component to a list
+ * - Set custom vendor details (price, URL, vendor name)
+ * - Viewing product details in a browser
+ */
 class DetailActivity : AppCompatActivity() {
 
+    // ViewModel responsible for fetching product details
     private val viewModel: PartViewModel by viewModels { PartViewModelFactory((application as MyApplication).api) }
 
     override fun onCreate(savedInstanceState: Bundle?) {

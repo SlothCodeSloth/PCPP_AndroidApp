@@ -4,6 +4,14 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 
+/**
+ * Pager adapter for [MainActivity].
+ *
+ * Handles switching between the following:
+ * - [SettingsFragment]
+ * - [MainSearchFragment]
+ * - [ListOverviewFragment]
+ */
 class MainPagerAdapter(
     fragmentActivity: FragmentActivity,
     private val listNames: List<String>

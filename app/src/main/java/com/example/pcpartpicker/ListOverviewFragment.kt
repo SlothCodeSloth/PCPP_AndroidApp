@@ -16,6 +16,14 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.coroutines.launch
 
+/**
+ * Fragment that displays all user created lists of components.
+ *
+ * Responsibilities:
+ * - Shows all lists using a [RecyclerView].
+ * - Provides a Floating Action Button to create new lists.
+ * - Supports swipe functionality for removing lists.
+ */
 class ListOverviewFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: ListAdapter
@@ -38,10 +46,13 @@ class ListOverviewFragment : Fragment() {
             startActivity(intent)
         }
         recyclerView.adapter = adapter
+
+        // Create a new list when the FAB is pressed
         fab.setOnClickListener {
             showCreateListDialog()
         }
 
+        // Swipe to delete lists
         val itemTouchHelper = ItemTouchHelper(object: ItemTouchHelper.SimpleCallback(
             0,
             ItemTouchHelper.LEFT
@@ -70,6 +81,10 @@ class ListOverviewFragment : Fragment() {
         return view;
     }
 
+    /**
+     * Displays a dialog for creating a new list.
+     * Ensures uniqueness by checking if a list with the same name already exists.
+     */
     private fun showCreateListDialog() {
         val context = requireContext()
         val dialog = CreateListDialog(context) { listName, iconId ->
@@ -89,6 +104,9 @@ class ListOverviewFragment : Fragment() {
         dialog.show()
     }
 
+    /**
+     * Loads all lists from the database and submits them to the RecyclerView adapter.
+     */
     private fun loadLists() {
         val dao = (requireActivity().application as MyApplication).database.componentDao()
         lifecycleScope.launch {

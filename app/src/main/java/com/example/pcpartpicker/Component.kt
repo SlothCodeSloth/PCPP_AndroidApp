@@ -1,6 +1,18 @@
 package com.example.pcpartpicker
 
+/**
+ * Represents different component related data models for the app.
+ */
 class Component {
+    /**
+     * Represents a simple part/component with basic info.
+     *
+     * @property name Name of the part/component.
+     * @property url URL to the part details.
+     * @property price The listed price as a string.
+     * @property image Optional image URL.
+     * @property customPrice Optional custom price set by the user.
+     */
     data class Part(
         val name: String,
         val url: String,

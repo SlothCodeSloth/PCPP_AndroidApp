@@ -64,6 +64,29 @@ Shown below are early examples of swapping themes and switching to dark mode.
 
 ---
 
+## 📂 Project Structure
+```
+app.src.main/
+├── java.com.example.pcpartpicker/
+│ ├── BundleEntity.kt and ComponentEntity.kt
+│ ├── BundleComponentCrossRef.kt
+│ ├── BundleWithComponents.kt
+│ ├── BundleDao.kt and ComponentDao.kt
+│ ├── MyApplication.kt
+│ ├── PyPartPickerApi.kt
+│ └── Other Kotlin Files
+├── res/
+│ ├── anim/
+│ │ └── Animation .xml files
+│ ├── drawable/
+│ │ └── All Icon .xml files
+│ └── layout/
+│ │ ├── All Activity and Fragment Views
+│ │ ├── Component, List, and Bundle Views
+│ | └── Dialog Views
+└── AndroidManifest.xml
+```
+
 ## 🚀 Setup & Installation
 
 ### Prerequisites
